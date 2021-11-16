@@ -20,7 +20,10 @@ public class MainClass {
 		 * 
 		 * 0. Агрегация		- состояние может быть составным
 		 * 1. Инкапсуляция	- состояние + поведение = объект
-		 * 
+		 * 2. Наследование	- класс-потомок включает состояние и поведение
+		 * 						класса-предка, + может включать своё.
+		 * 3. Полиморфизм	- класс-потомок может реализовывать поведение,
+		 * 						предусмотренное предком, другим способом.
 		 */
 		
 		/*
@@ -38,23 +41,28 @@ public class MainClass {
 		 * Найти сумму векторов v3 = v1 + v2
 		 * Переместить точку p на вектор v3
 		 */
-		Coordinates p, v1, v2, v3, p2;
+		Point p, p2;
+		Vector v1, v2, v3;
 
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Введите координаты точки p: ");
-		p = new Coordinates( sc.nextDouble(), sc.nextDouble() );
+		p = new Point( sc.nextDouble(), sc.nextDouble() );
 
 		System.out.print("Введите координаты вектора v1: ");
-		v1 = new Coordinates( sc.nextDouble(), sc.nextDouble() );
+		v1 = new Vector( sc.nextDouble(), sc.nextDouble() );
 
 		System.out.print("Введите координаты вектора v2: ");
-		v2 = new Coordinates( sc.nextDouble(), sc.nextDouble() );
+		v2 = new Vector( sc.nextDouble(), sc.nextDouble() );
 		
-		v3 = new Coordinates(v1.x + v2.x, v1.y + v2.y);
-		System.out.println("v3 = {" + v3 + "}");
+		v3 = add(v1, v2);
+		System.out.println("v3 = " + v3);
 		
-		p2 = new Coordinates(p.x + v3.x, p.y + v3.y);
-		System.out.println("p2 = (" + p2 + ")");
+		p2 = new Point(p.x + v3.x, p.y + v3.y);
+		System.out.println("p2 = " + p2);
+	}
+	
+	static Vector add(Vector v1, Vector v2) {
+		return new Vector(v1.x + v2.x, v1.y + v2.y);
 	}
 	
 	static class Coordinates {
@@ -68,6 +76,29 @@ public class MainClass {
 		@Override
 		public String toString() {
 			return "" + x + "," + y;
+		}
+	}
+	
+	static class Point extends Coordinates {
+		Point(double x, double y) {
+			super(x, y);
+		}
+		
+		@Override
+		public String toString() {
+			return "(" + super.toString() + ")";
+		}
+		
+	}
+	
+	static class Vector extends Coordinates {
+		Vector(double x, double y) {
+			super(x, y);
+		}
+		
+		@Override
+		public String toString() {
+			return "{" + super.toString() + "}";
 		}
 	}
 
