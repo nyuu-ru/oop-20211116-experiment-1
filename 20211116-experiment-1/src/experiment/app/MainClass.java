@@ -10,6 +10,7 @@ import experiment.app.MainClass.Coordinates;
  *
  */
 public class MainClass {
+	public static int a = 5; // "Глобальная" переменная :)
 
 	public static void main(String[] args) {
 		/*
