@@ -24,6 +24,9 @@ public class MainClass {
 		 * 						класса-предка, + может включать своё.
 		 * 3. Полиморфизм	- класс-потомок может реализовывать поведение,
 		 * 						предусмотренное предком, другим способом.
+		 * 
+		 * 
+		 * 
 		 */
 		
 		/*
@@ -57,12 +60,21 @@ public class MainClass {
 		v3 = add(v1, v2);
 		System.out.println("v3 = " + v3);
 		
-		p2 = new Point(p.x + v3.x, p.y + v3.y);
-		System.out.println("p2 = " + p2);
+		p.moveBy(v3);
+		System.out.println("p  = " + p);
 	}
 	
 	static Vector add(Vector v1, Vector v2) {
 		return new Vector(v1.x + v2.x, v1.y + v2.y);
+	}
+	
+	static Point move(Point p, Vector v) {
+		return new Point(p.x + v.x, p.y + v.y);
+	}
+	
+	static void moveBy(Point p, Vector v) {
+		p.x += v.x;
+		p.y += v.y;
 	}
 	
 	static class Coordinates {
@@ -89,6 +101,10 @@ public class MainClass {
 			return "(" + super.toString() + ")";
 		}
 		
+		public void moveBy(Vector v) { // this - неявный параметр.
+			x += v.x;
+			y += v.y;
+		}
 	}
 	
 	static class Vector extends Coordinates {
@@ -100,6 +116,10 @@ public class MainClass {
 		public String toString() {
 			return "{" + super.toString() + "}";
 		}
+		
+		public void add(Vector v) {
+			x += v.x;
+			y += v.y;
+		}
 	}
-
 }
