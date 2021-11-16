@@ -25,7 +25,13 @@ public class MainClass {
 		 * 3. Полиморфизм	- класс-потомок может реализовывать поведение,
 		 * 						предусмотренное предком, другим способом.
 		 * 
+		 * static-методы - просто функции, которые находятся в пространстве
+		 * 		имён какого-то класса. Неявный параметр this они _не_
+		 * 		принимают.
 		 * 
+		 * Обычные методы - функции, которые не только находятся в
+		 * 		пространстве имён класса, но также принимают неявный
+		 * 		параметр this соответствующего типа.
 		 * 
 		 */
 		
@@ -43,6 +49,10 @@ public class MainClass {
 		 * Есть точка p=(x0, y0) и два вектора - v1={x1, y1}, v2={x2, y2}
 		 * Найти сумму векторов v3 = v1 + v2
 		 * Переместить точку p на вектор v3
+		 * 
+		 * Пример 2:
+		 * То же самое, что в примере 1,
+		 * но перед перемещением точки вектор v3 удвоить.
 		 */
 		Point p, p2;
 		Vector v1, v2, v3;
@@ -57,25 +67,20 @@ public class MainClass {
 		System.out.print("Введите координаты вектора v2: ");
 		v2 = new Vector( sc.nextDouble(), sc.nextDouble() );
 		
-		v3 = add(v1, v2);
+		v3 = Vector.add(v1, v2);
 		System.out.println("v3 = " + v3);
+		
+		v3.add(v3);
+		System.out.println("v3 = " + v3);
+		
+		Point.move(p, v3);
 		
 		p.moveBy(v3);
 		System.out.println("p  = " + p);
 	}
 	
-	static Vector add(Vector v1, Vector v2) {
-		return new Vector(v1.x + v2.x, v1.y + v2.y);
-	}
 	
-	static Point move(Point p, Vector v) {
-		return new Point(p.x + v.x, p.y + v.y);
-	}
 	
-	static void moveBy(Point p, Vector v) {
-		p.x += v.x;
-		p.y += v.y;
-	}
 	
 	static class Coordinates {
 		public double x, y;
@@ -105,6 +110,10 @@ public class MainClass {
 			x += v.x;
 			y += v.y;
 		}
+		
+		static Point move(Point p, Vector v) {
+			return new Point(p.x + v.x, p.y + v.y);
+		}
 	}
 	
 	static class Vector extends Coordinates {
@@ -120,6 +129,15 @@ public class MainClass {
 		public void add(Vector v) {
 			x += v.x;
 			y += v.y;
+		}
+		
+		public void subtract(Vector v) {
+			x -= v.x;
+			y -= v.y;
+		}
+		
+		static Vector add(Vector v1, Vector v2) { // Не принимает this
+			return new Vector(v1.x + v2.x, v1.y + v2.y);
 		}
 	}
 }
