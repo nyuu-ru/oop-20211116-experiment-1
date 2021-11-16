@@ -2,6 +2,8 @@ package experiment.app;
 
 import java.util.Scanner;
 
+import experiment.app.MainClass.Coordinates;
+
 /** Самый главный класс
  * 
  * @author unyuu
@@ -10,6 +12,11 @@ import java.util.Scanner;
 public class MainClass {
 
 	public static void main(String[] args) {
+		/*
+		 * 0. Агрегация
+		 * 
+		 */
+		
 		/*
 		 *  - Имеется плоскость.
 		 *  - На плоскости - точки. У точек есть координаты (x, y)
@@ -26,39 +33,31 @@ public class MainClass {
 		 * Переместить точку p на вектор v3
 		 */
 		Coordinates p, v1, v2, v3, p2;
-		p = new Coordinates();
-		v1 = new Coordinates();
-		v2 = new Coordinates();
-		v3 = new Coordinates();
-		p2 = new Coordinates();
-		
+
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Введите координаты точки p: ");
-		p.x = sc.nextDouble();
-		p.y = sc.nextDouble();
+		p = new Coordinates( sc.nextDouble(), sc.nextDouble() );
 
 		System.out.print("Введите координаты вектора v1: ");
-		v1.x = sc.nextDouble();
-		v1.y = sc.nextDouble();
+		v1 = new Coordinates( sc.nextDouble(), sc.nextDouble() );
 
 		System.out.print("Введите координаты вектора v2: ");
-		v2.x = sc.nextDouble();
-		v2.y = sc.nextDouble();
+		v2 = new Coordinates( sc.nextDouble(), sc.nextDouble() );
 		
-		v3.x = v1.x + v2.x;
-		v3.y = v1.y + v2.y;
-		
+		v3 = new Coordinates(v1.x + v2.x, v1.y + v2.y);
 		System.out.println("v3 = {" + v3.x + "," + v3.y + "}");
 		
-		p2.x = p.x + v3.x;
-		p2.y = p.y + v3.y;
-		
+		p2 = new Coordinates(p.x + v3.x, p.y + v3.y);
 		System.out.println("p2 = (" + p2.x + "," + p2.y + ")");
-
 	}
 	
-	class Coordinates {
+	static class Coordinates {
 		public double x, y;
+		
+		Coordinates(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
 	}
 
 }
