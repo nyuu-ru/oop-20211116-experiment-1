@@ -25,36 +25,40 @@ public class MainClass {
 		 * Найти сумму векторов v3 = v1 + v2
 		 * Переместить точку p на вектор v3
 		 */
-		double
-			p_x, p_y,
-			v1_x, v1_y,
-			v2_x, v2_y,
-			v3_x, v3_y,
-			p2_x, p2_y;
+		Coordinates p, v1, v2, v3, p2;
+		p = new Coordinates();
+		v1 = new Coordinates();
+		v2 = new Coordinates();
+		v3 = new Coordinates();
+		p2 = new Coordinates();
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Введите координаты точки p: ");
-		p_x = sc.nextDouble();
-		p_y = sc.nextDouble();
+		p.x = sc.nextDouble();
+		p.y = sc.nextDouble();
 
 		System.out.print("Введите координаты вектора v1: ");
-		v1_x = sc.nextDouble();
-		v1_y = sc.nextDouble();
+		v1.x = sc.nextDouble();
+		v1.y = sc.nextDouble();
 
 		System.out.print("Введите координаты вектора v2: ");
-		v2_x = sc.nextDouble();
-		v2_y = sc.nextDouble();
+		v2.x = sc.nextDouble();
+		v2.y = sc.nextDouble();
 		
-		v3_x = v1_x + v2_x;
-		v3_y = v1_y + v2_y;
+		v3.x = v1.x + v2.x;
+		v3.y = v1.y + v2.y;
 		
-		System.out.println("v3 = {" + v3_x + "," + v3_y + "}");
+		System.out.println("v3 = {" + v3.x + "," + v3.y + "}");
 		
-		p2_x = p_x + v3_x;
-		p2_y = p_y + v3_y;
+		p2.x = p.x + v3.x;
+		p2.y = p.y + v3.y;
 		
-		System.out.println("p2 = (" + p2_x + "," + p2_y + ")");
+		System.out.println("p2 = (" + p2.x + "," + p2.y + ")");
 
+	}
+	
+	class Coordinates {
+		public double x, y;
 	}
 
 }
