@@ -13,7 +13,13 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		/*
-		 * 0. Агрегация
+		 * Объект - программная сущность, которая находится в определённом
+		 * 		состоянии и обладает определённым поведением.
+		 * Класс  - тип данных, который определяет структуру состояния и
+		 * 		задаёт определённое поведение.
+		 * 
+		 * 0. Агрегация		- состояние может быть составным
+		 * 1. Инкапсуляция	- состояние + поведение = объект
 		 * 
 		 */
 		
@@ -45,10 +51,10 @@ public class MainClass {
 		v2 = new Coordinates( sc.nextDouble(), sc.nextDouble() );
 		
 		v3 = new Coordinates(v1.x + v2.x, v1.y + v2.y);
-		System.out.println("v3 = {" + v3.x + "," + v3.y + "}");
+		System.out.println("v3 = {" + v3 + "}");
 		
 		p2 = new Coordinates(p.x + v3.x, p.y + v3.y);
-		System.out.println("p2 = (" + p2.x + "," + p2.y + ")");
+		System.out.println("p2 = (" + p2 + ")");
 	}
 	
 	static class Coordinates {
@@ -57,6 +63,11 @@ public class MainClass {
 		Coordinates(double x, double y) {
 			this.x = x;
 			this.y = y;
+		}
+		
+		@Override
+		public String toString() {
+			return "" + x + "," + y;
 		}
 	}
 
